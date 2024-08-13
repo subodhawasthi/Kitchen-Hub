@@ -37,13 +37,13 @@ const Body = () => {
 
     return (
         <div className="body">
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="search-box" value={searchText} onChange={(e) => {
+            <div className="filter mr-20 flex justify-between">
+                <div className="m-4 p-4">
+                    <input type="text" className="border border-solid border-black" value={searchText} onChange={(e) => {
                         setSearchText(e.target.value);
                     }}  
                     />
-                    <button onClick={() => {
+                    <button className="px-4 py-2 bg-yellow-200 m-4 rounded-xl" onClick={() => {
 
                         const filteredRestaurant = listOfRestaurants.filter((res) => 
                             res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -51,7 +51,8 @@ const Body = () => {
                     setFilteredRestaurants(filteredRestaurant);
                     }}>Search</button>
                 </div>
-                <button className="filter-btn" onClick={() => {
+                <div className="m-4 p-4 flex items-center">
+                <button className="px-4 py-2 bg-red-300 rounded-lg" onClick={() => {
                     const filteredList = listOfRestaurants.filter(
                         (res) => res.info.avgRating > 4
                     );
@@ -59,8 +60,9 @@ const Body = () => {
                 }}>
                     Top Rated
                 </button>
+                </div>
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap space-x-2">
                 {filteredRestaurant.map((restaurants) => (
                     <Link key={restaurants.info.id} to={"/restaurants/"+ restaurants.info.id}><RestaurantCard resData={restaurants}/></Link>
                 )) }
